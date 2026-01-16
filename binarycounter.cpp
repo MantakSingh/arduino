@@ -12,18 +12,19 @@ pinMode(yellowPin,OUTPUT);
 
 }
 
+
+
 void loop() {
 
-// Red
-digitalWrite(redPin,HIGH);
+  for (int i = 0; i < 16; i++) {
 
-// Blue
-digitalWrite(bluePin,HIGH);
+    digitalWrite(redPin,    i & 1);
+    digitalWrite(bluePin,   i & 2);
+    digitalWrite(greenPin,  i & 4);
+    digitalWrite(yellowPin, i & 8);
 
-// Green
-digitalWrite(greenPin,HIGH);
-
-// Yellow
-digitalWrite(yellowPin,HIGH);
+    delay(1000);
+  }
 
 }
+
