@@ -5,6 +5,9 @@ String msg = "What color do you want to turn on? \n 1: Red 2: Green 3: Blue ";
 int selectedColor;
 void setup() {
   Serial.begin(9600);
+  pinMode(12,OUTPUT);
+  pinMode(11,OUTPUT);
+  pinMode(10,OUTPUT);
 }
 
 void loop() {
@@ -22,7 +25,7 @@ void loop() {
   if(selectedColor == 3){
     digitalWrite(bluePin, HIGH);
   }
-  delay(5000);
+  delay(1000);
   // Reset
   digitalWrite(redPin,LOW);
   digitalWrite(greenPin,LOW);
