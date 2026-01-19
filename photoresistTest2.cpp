@@ -1,6 +1,6 @@
 int lightPen = A0;
 int lightVal;
-int dv = 1000;
+int dv = 200;
 int redPin = A4;
 int greenPin = A2;
 
@@ -15,12 +15,12 @@ void loop(){
   lightVal = analogRead(lightPen);
   if(lightVal >= 20){
     digitalWrite(greenPin,HIGH);
+    digitalWrite(redPin,LOW);
   } else{
     digitalWrite(redPin,HIGH);
+    digitalWrite(greenPin,LOW);
   }
   delay(dv);
-  digitalWrite(greenPin,LOW);
-  digitalWrite(redPin,LOW);
   Serial.println(lightVal);
-  delay(dv);
+
 }
