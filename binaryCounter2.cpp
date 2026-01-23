@@ -1,9 +1,7 @@
-int latchPin=11;
-int clockPin=9;
+int latchPin=9;
+int clockPin=11;
 int dataPin=12;
-int dt=250;
-
-byte LEDs;
+int dt=500;
 
 void setup() {
   Serial.begin(9600);
@@ -13,12 +11,10 @@ void setup() {
 }
 
 void loop() {
-  for(int i = 0; i < 255; i++){
-    LEDs = byte(i);
+  for(int i = 0b00000000; i < 0b11111111; i++){
     digitalWrite(latchPin,LOW);
-    shiftOut(dataPin,clockPin,LSBFIRST,LEDs);
+    shiftOut(dataPin,clockPin,MSBFIRST,i);
     digitalWrite(latchPin,HIGH);
-    Serial.println(LEDs);
     delay(dt);
   }
 }
