@@ -9,20 +9,103 @@ int d7=12;
 LiquidCrystal lcd(rs,en,d4,d5,d6,d7);
 
 // Calculator Variables
-String firstMsg = "Please enter your first number"
 float firstNum;
-String
+float secondNum;
+char operatorChar;
+float answer;
+
 void setup() {
   Serial.begin(9600);
   lcd.begin(16,2);
+  lcd.setCursor(0,0);
+  lcd.print("Please Enter");
+  lcd.setCursor(0,1);
+  lcd.print("Your Number..");
 }
 
 void loop() {
-  lcd.setCursor(0,0);
-  lcd.print(firstMsg);
-  while(Serial.available() == 0){
 
+  // First Number
+  while(Serial.available() == 0){
+    //Blinking period at the end
+    lcd.setCursor(13,1);
+    lcd.print(".");
+    delay(500);
+    lcd.setCursor(13,1);
+    lcd.print("  ");
+    delay(500);
   }
   firstNum = Serial.parseFloat();
-  lcd
+
+  // Clear Buffer
+  while (Serial.available() > 0) {
+    Serial.read();
+  }
+
+  // Second Number
+  lcd.clear();
+  while(Serial.available() == 0){
+    lcd.setCursor(0,0);
+    lcd.print("Please Enter The");
+    lcd.setCursor(0,1);
+    lcd.print("2nd Number..");
+    //Blinking period at the end 
+    lcd.setCursor(12,1);
+    lcd.print(".");
+    delay(500);
+    lcd.setCursor(12,1);
+    lcd.print("  ");
+    delay(500);
+  }
+  secondNum = Serial.parseFloat();
+
+  // Clear Buffer
+  while (Serial.available() > 0) {
+    Serial.read();
+  }
+
+  //Operator
+  lcd.clear();
+  while(Serial.available() == 0){
+    lcd.setCursor(0,0);
+    lcd.print("What Operation?");
+    lcd.setCursor(0,1);
+    lcd.print(" +   -   *   / ");
+  }
+  operatorChar = Serial.read();
+  
+  // Displaying the answer
+  if(operatorChar = "+"){
+    answer = firstNum + secondNum;
+    lcd.clear();
+    lcd.setCursor(0, 0);
+    lcd.print("Your Answer Is:");
+    lcd.setCursor(0,1);
+    lcd.print(answer);
+  }
+  else if(operatorChar = "-"){
+    answer = firstNum - secondNum;
+    lcd.clear();
+    lcd.setCursor(0, 0);
+    lcd.print("Your Answer Is:");
+    lcd.setCursor(0,1);
+    lcd.print(answer);
+  }
+  else if(operatorChar = "*"){
+    answer = firstNum * secondNum;
+    lcd.clear();
+    lcd.setCursor(0, 0);
+    lcd.print("Your Answer Is:");
+    lcd.setCursor(0,1);
+    lcd.print(answer);
+  }
+  else if(operatorChar = "/"){
+    answer = firstNum / secondNum;
+    lcd.clear();
+    lcd.setCursor(0, 0);
+    lcd.print("Your Answer Is:");
+    lcd.setCursor(0,1);
+    lcd.print(answer);
+  }
+  while(true);
 }
