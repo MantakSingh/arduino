@@ -73,39 +73,21 @@ void loop() {
     lcd.print(" +   -   *   / ");
   }
   operatorChar = Serial.read();
-  
-  // Displaying the answer
-  if(operatorChar = "+"){
-    answer = firstNum + secondNum;
-    lcd.clear();
-    lcd.setCursor(0, 0);
-    lcd.print("Your Answer Is:");
-    lcd.setCursor(0,1);
-    lcd.print(answer);
-  }
-  else if(operatorChar = "-"){
-    answer = firstNum - secondNum;
-    lcd.clear();
-    lcd.setCursor(0, 0);
-    lcd.print("Your Answer Is:");
-    lcd.setCursor(0,1);
-    lcd.print(answer);
-  }
-  else if(operatorChar = "*"){
-    answer = firstNum * secondNum;
-    lcd.clear();
-    lcd.setCursor(0, 0);
-    lcd.print("Your Answer Is:");
-    lcd.setCursor(0,1);
-    lcd.print(answer);
-  }
-  else if(operatorChar = "/"){
-    answer = firstNum / secondNum;
-    lcd.clear();
-    lcd.setCursor(0, 0);
-    lcd.print("Your Answer Is:");
-    lcd.setCursor(0,1);
-    lcd.print(answer);
-  }
+
+  // Calculate answer
+  if(operatorChar == '+') answer = firstNum + secondNum;
+  else if(operatorChar == '-') answer = firstNum - secondNum;
+  else if(operatorChar == '*') answer = firstNum * secondNum;
+  else if(operatorChar == '/') answer = firstNum / secondNum;
+
+  // Display answer
+  lcd.clear();
+  lcd.setCursor(0,0);
+  lcd.print("Your Answer Is:");
+  lcd.setCursor(0,1);
+  lcd.print(answer);
+
+  // Stop program
   while(true);
+
 }
